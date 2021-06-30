@@ -4,8 +4,6 @@ import { Dice, rollDices } from '../utils/rollDice';
 export class Battle implements IModifier {
   readonly message = 'Battle ensued.';
 
-  constructor() {}
-
   roll(): ReturnType<IModifier['roll']> {
     const [armyOne, armyTwo] = this.calculateLoss(rollDices(3), rollDices(2));
 

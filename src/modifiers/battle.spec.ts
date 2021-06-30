@@ -28,7 +28,7 @@ describe('Mod', () => {
     jest.spyOn(global.Math, 'random').mockReturnValueOnce(1).mockReturnValueOnce(1).mockReturnValueOnce(0.1);
 
     const wololooo = new Wololooo(1, 4).roll();
-    expect(wololooo).toEqual({ armyOne: 4, armyTwo: 4, wasTriggered: true });
+    expect(wololooo).toEqual({ armyOne: 4, armyTwo: -4, wasTriggered: true });
   });
 
   it('should not Wololooo', () => {
