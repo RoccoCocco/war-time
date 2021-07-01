@@ -1,29 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Optional } from '@nestjs/common';
 
 import { WarOutcome } from '../enums/warOutcome';
 import { IModifier } from '../interfaces/modifier';
 import { WageWarResponse, WarFightHistory } from '../models/war';
 import { Battle } from '../modifiers/battle';
-import { Disaster } from '../modifiers/disaster';
-import { Wololooo } from '../modifiers/wololooo';
 import { messageConstruct } from '../utils/messageConstruct';
 
 @Injectable()
 export class WageWarService {
-  start(one: number, two: number): WageWarResponse {
-    const modifiers = [new Disaster(0.3, 0, 1), new Wololooo(0.2, 3)];
-    return this.fight(one, two, modifiers);
-  }
+  constructor(@Inject('ActiveModifiers') @Optional() private modifiers: Array<IModifier>) {}
 
-  fight(armyOne: number, armyTwo: number, modifiers: Array<IModifier>): WageWarResponse {
-    modifiers = [new Battle(), ...modifiers];
+  start(armyOne: number, armyTwo: number): WageWarResponse {
+    const modifiers = [new Battle(), ...(this.modifiers || [])];
 
     let whoAttacks = true;
     const history: Array<WarFightHistory> = [];
 
     while (armyOne > 0 && armyTwo > 0) {
-      for (const i in modifiers) {
-        const { armyOne: one, armyTwo: two, wasTriggered } = modifiers[i].roll();
+      for (const modifier of modifiers) {
+        const { armyOne: one, armyTwo: two, wasTriggered } = modifier.roll();
 
         const oneStatus = whoAttacks ? one : two;
         const twoStatus = whoAttacks ? two : one;
@@ -35,7 +30,7 @@ export class WageWarService {
         if (armyTwo < 0) armyTwo = 0;
 
         if (wasTriggered) {
-          const message = messageConstruct(modifiers[i].message, oneStatus, twoStatus);
+          const message = messageConstruct(modifier.message, oneStatus, twoStatus);
           history.push({ armyOneCount: armyOne, armyTwoCount: armyTwo, message });
         }
 

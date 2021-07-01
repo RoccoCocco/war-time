@@ -29,7 +29,7 @@ describe('WageWar Service', () => {
       .mockReturnValueOnce({ armyOne: 0, armyTwo: 0, wasTriggered: false })
       .mockReturnValueOnce({ armyOne: -2, armyTwo: -2, wasTriggered: true });
 
-    const result = service.fight(1, 1, []);
+    const result = service.start(1, 1);
     expect(result.outcome).toBe(WarOutcome.Draw);
     expect(result.history[0].armyOneCount).toBe(0);
     expect(result.history[0].armyTwoCount).toBe(0);
@@ -37,14 +37,14 @@ describe('WageWar Service', () => {
 
   it('should be Army Two victory', () => {
     mockBattle.roll.mockReturnValueOnce({ armyOne: -1, armyTwo: 0, wasTriggered: true });
-    const response = service.fight(1, 1, []);
+    const response = service.start(1, 1);
     expect(response.outcome).toBe(WarOutcome.ArmyTwo);
     expect(response.history.length).toBe(1);
   });
 
   it('should be Army One victory', () => {
     mockBattle.roll.mockReturnValueOnce({ armyOne: 0, armyTwo: -1, wasTriggered: true });
-    const response = service.fight(1, 1, []);
+    const response = service.start(1, 1);
     expect(response.outcome).toBe(WarOutcome.ArmyOne);
     expect(response.history.length).toBe(1);
   });
