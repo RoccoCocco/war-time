@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { ExecutionContext, Injectable, NestInterceptor, CallHandler } from '@nestjs/common';
 import * as Sentry from '@sentry/minimal';
 import { Observable } from 'rxjs';

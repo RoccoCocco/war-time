@@ -21,7 +21,7 @@ async function bootstrap() {
   SwaggerModule.setup('/docs', app, document);
 
   Sentry.init({
-    dsn: process.env.SENTRY_DSN,
+    dsn: process.env.SENTRY_DSN || 'https://4c235cf283a044a587b748999893122c@o903267.ingest.sentry.io/5843017',
     environment: process.env.ENVIRONMENT || 'local',
   });
 

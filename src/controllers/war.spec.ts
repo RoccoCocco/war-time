@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { WarController } from '../controllers/war';
@@ -37,5 +38,11 @@ describe('WarController', () => {
     mockBattle.roll.mockReturnValueOnce({ armyOne: -10, armyTwo: -10, wasTriggered: true });
     const response = controller.wageWar({ armyOne: 10, armyTwo: 10 });
     expect(response).toBe(WarOutcome.Draw);
+  });
+
+  it('to throw error', () => {
+    const message = 'Hello There... General Kenobi';
+    expect(() => controller.wageWarError(message)).toThrow(InternalServerErrorException);
+    expect(() => controller.wageWarError(message)).toThrowError(message);
   });
 });
