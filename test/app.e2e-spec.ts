@@ -16,7 +16,12 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer()).get('/').expect(200).expect('Hello World!');
+  it('/war (GET)', () => {
+    return request(app.getHttpServer()).get('/war?armyOne=1&armyTwo=1').expect(200);
+  });
+
+  it.skip('/war (GET) Fail', () => {
+    // REVIEW: not validating against model
+    return request(app.getHttpServer()).get('/war?armyOne=0&armyTwo=1').expect(400);
   });
 });
