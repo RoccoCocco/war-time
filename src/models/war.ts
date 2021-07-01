@@ -7,6 +7,7 @@ export enum WarOutcome {
   ArmyTwo = 'Army Two',
   Draw = 'Draw',
 }
+import { transformToNumber } from '../utils/transformToNumber';
 
 export class WarFightHistory {
   @ApiProperty()
@@ -23,13 +24,13 @@ export class WageWarQuery {
   @ApiProperty()
   @IsInt()
   @Min(1)
-  @Transform(({ value }) => Number(value))
+  @Transform(transformToNumber)
   armyOne: number;
 
   @ApiProperty()
   @IsInt()
   @Min(1)
-  @Transform(({ value }) => Number(value))
+  @Transform(transformToNumber)
   armyTwo: number;
 }
 
