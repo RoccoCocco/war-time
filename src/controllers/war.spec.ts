@@ -28,8 +28,14 @@ describe('WarController', () => {
 
   it('should be draw', () => {
     mockBattle.roll.mockReturnValueOnce({ armyOne: -10, armyTwo: -10, wasTriggered: true });
-    const response = controller.start({ armyOne: 10, armyTwo: 10 });
+    const response = controller.wageWarWithHistory({ armyOne: 10, armyTwo: 10 });
     expect(response.outcome).toBe(WarOutcome.Draw);
     expect(response.history.length).toBe(1);
+  });
+
+  it('should be draw', () => {
+    mockBattle.roll.mockReturnValueOnce({ armyOne: -10, armyTwo: -10, wasTriggered: true });
+    const response = controller.wageWar({ armyOne: 10, armyTwo: 10 });
+    expect(response).toBe(WarOutcome.Draw);
   });
 });

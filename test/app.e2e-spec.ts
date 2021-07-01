@@ -16,12 +16,16 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/war (GET)', () => {
-    return request(app.getHttpServer()).get('/war?armyOne=1&armyTwo=1').expect(200);
+  it('/wageWar (GET)', () => {
+    return request(app.getHttpServer()).get('/wageWar?armyOne=1&armyTwo=1').expect(200);
   });
 
-  it.skip('/war (GET) Fail', () => {
+  it('/wageWar (GET)', () => {
+    return request(app.getHttpServer()).get('/wageWarWithHistory?armyOne=1&armyTwo=1').expect(200);
+  });
+
+  it.skip('/wageWar (GET) Fail', () => {
     // REVIEW: not validating against model
-    return request(app.getHttpServer()).get('/war?armyOne=0&armyTwo=1').expect(400);
+    return request(app.getHttpServer()).get('/wageWar?armyOne=0&armyTwo=1').expect(400);
   });
 });
