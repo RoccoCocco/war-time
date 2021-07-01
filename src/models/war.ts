@@ -1,20 +1,19 @@
-import { IsInt } from 'class-validator';
+import { IsInt, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 
 export enum WarOutcome {
-  Red = 'Red',
-  Blue = 'Blue',
+  ArmyOne = 'Army One',
+  ArmyTwo = 'Army Two',
   Draw = 'Draw',
-  Stalemate = 'Stalemate',
 }
 
 export class WarFightHistory {
   @ApiProperty()
-  redCount: number;
+  armyOneCount: number;
 
   @ApiProperty()
-  blueCount: number;
+  armyTwoCount: number;
 
   @ApiProperty()
   message: string;
@@ -23,11 +22,13 @@ export class WarFightHistory {
 export class WageWarQuery {
   @ApiProperty()
   @IsInt()
+  @Min(1)
   @Transform(({ value }) => Number(value))
   armyOne: number;
 
   @ApiProperty()
   @IsInt()
+  @Min(1)
   @Transform(({ value }) => Number(value))
   armyTwo: number;
 }

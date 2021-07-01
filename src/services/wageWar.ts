@@ -13,31 +13,31 @@ export class WageWarService {
     return this.fight(one, two, modifiers);
   }
 
-  fight(red: number, blue: number, modifiers: Array<IModifier>): WageWarResponse {
+  fight(armyOne: number, armyTwo: number, modifiers: Array<IModifier>): WageWarResponse {
     modifiers = [new Battle(), ...modifiers];
 
     let whoAttacks = true;
     const history: Array<WarFightHistory> = [];
 
-    while (red > 0 && blue > 0) {
+    while (armyOne > 0 && armyTwo > 0) {
       for (const i in modifiers) {
         const { armyOne: one, armyTwo: two, wasTriggered } = modifiers[i].roll();
 
         const oneStatus = whoAttacks ? one : two;
         const twoStatus = whoAttacks ? two : one;
 
-        red += oneStatus;
-        blue += twoStatus;
+        armyOne += oneStatus;
+        armyTwo += twoStatus;
 
-        if (red < 0) red = 0;
-        if (blue < 0) blue = 0;
+        if (armyOne < 0) armyOne = 0;
+        if (armyTwo < 0) armyTwo = 0;
 
         if (wasTriggered) {
           const message = messageConstruct(modifiers[i].message, oneStatus, twoStatus);
-          history.push({ redCount: red, blueCount: blue, message });
+          history.push({ armyOneCount: armyOne, armyTwoCount: armyTwo, message });
         }
 
-        if (red < 1 || blue < 1) {
+        if (armyOne < 1 || armyTwo < 1) {
           break;
         }
       }
@@ -45,7 +45,7 @@ export class WageWarService {
       whoAttacks = !whoAttacks;
     }
 
-    const outcome = red === blue ? WarOutcome.Draw : red ? WarOutcome.Red : WarOutcome.Blue;
+    const outcome = armyOne === armyTwo ? WarOutcome.Draw : armyOne ? WarOutcome.ArmyOne : WarOutcome.ArmyTwo;
 
     return { outcome, history };
   }

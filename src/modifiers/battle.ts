@@ -14,7 +14,7 @@ export class Battle implements IModifier {
     };
   }
 
-  private calculateLoss(attacker: Dice[], defender: Dice[]): [number, number] {
+  calculateLoss(attacker: Dice[], defender: Dice[]): [number, number] {
     const attackerRoll = [...attacker].sort();
     const defenderRoll = [...defender].sort();
 

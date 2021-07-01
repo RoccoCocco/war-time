@@ -7,12 +7,30 @@ describe('Mod', () => {
     expect(new Battle().roll().wasTriggered).toBe(true);
   });
 
+  it('should battle be equal loss', () => {
+    const [one, two] = new Battle().calculateLoss([1, 2, 3], [1, 3]);
+    expect(one).toEqual(two);
+  });
+
+  it('should battle be two loss', () => {
+    const [one, two] = new Battle().calculateLoss([6, 5, 1], [4, 3]);
+    expect(one).toEqual(0);
+    expect(two).toEqual(-2);
+  });
+
+  it('should battle be one loss', () => {
+    const [one, two] = new Battle().calculateLoss([6, 6, 6], [6, 6]);
+    expect(one).toEqual(-2);
+    expect(two).toEqual(0);
+  });
+
   it('should disaster ', () => {
     const disaster = new Disaster(1, 7, 7).roll();
     expect(disaster).toEqual({ armyOne: -7, armyTwo: -7, wasTriggered: true });
   });
 
   it('should not disaster ', () => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(1);
     const disaster = new Disaster(0, 10, 10).roll();
     expect(disaster.wasTriggered).toBe(false);
   });
