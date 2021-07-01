@@ -1,6 +1,7 @@
-import { IsInt, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
+import { IsInt, Min } from 'class-validator';
+
 import { WarOutcome } from '../enums/warOutcome';
 import { transformToNumber } from '../utils/transformToNumber';
 

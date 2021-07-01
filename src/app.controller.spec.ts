@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { WarController } from './controllers/war';
-import { WageWarService } from './services/wageWar';
 import { WarOutcome } from './enums/warOutcome';
 import { Battle } from './modifiers/battle';
+import { WageWarService } from './services/wageWar';
 
 const roll = jest.fn<ReturnType<Battle['roll']>, any>();
 const mockBattle = { roll };

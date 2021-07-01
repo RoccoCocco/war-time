@@ -1,7 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { WageWarService } from '../services/wageWar';
-import { WageWarQuery, WageWarResponse } from '../models/war';
 import { ApiOkResponse } from '@nestjs/swagger';
+
+import { WageWarQuery, WageWarResponse } from '../models/war';
+import { WageWarService } from '../services/wageWar';
 
 @Controller('war')
 export class WarController {
