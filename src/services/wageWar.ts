@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { WarFightHistory, WarOutcome, WageWarResponse } from '../models/war';
+import { WarFightHistory, WageWarResponse } from '../models/war';
 import { messageConstruct } from '../utils/messageConstruct';
 import { IModifier } from '../interfaces/modifier';
+import { WarOutcome } from '../enums/warOutcome';
 import { Wololooo } from '../modifiers/wololooo';
 import { Disaster } from '../modifiers/disaster';
 import { Battle } from '../modifiers/battle';

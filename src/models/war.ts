@@ -1,12 +1,7 @@
 import { IsInt, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-
-export enum WarOutcome {
-  ArmyOne = 'Army One',
-  ArmyTwo = 'Army Two',
-  Draw = 'Draw',
-}
+import { WarOutcome } from '../enums/warOutcome';
 import { transformToNumber } from '../utils/transformToNumber';
 
 export class WarFightHistory {

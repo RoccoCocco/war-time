@@ -1,4 +1,4 @@
-import { WarOutcome } from '../models/war';
+import { WarOutcome } from '../enums/warOutcome';
 
 export const messageConstruct = (message: string, armyOne: number, armyTwo: number) =>
   [message, messagePerArmy(WarOutcome.ArmyOne, armyOne), messagePerArmy(WarOutcome.ArmyTwo, armyTwo)].join(' ');
